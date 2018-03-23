@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="editTextBackground">@null</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:listDivider">@drawable/downline</item>
+    </style>
+
+</resources>
