@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         button.setOnClickListener {
            url=editText.getText().toString()
-            val intent = Intent(this@MainActivity, ShowActivity::class.java)
+            val intent = Intent(this@MainActivity, WeexActivity::class.java)
             intent.putExtra("url",url)
             intent.putExtra("title","WEEX")
             intent.putExtra("rTitle","刷新")

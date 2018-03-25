@@ -24,54 +24,7 @@ import java.util.*
 /**
  * Created by sunlin on 2018/3/20.
  */
-class ShowActivity: MyActivtiyToolBar(),IWXRenderListener, IActivityNavBarSetter {
-    override fun clearNavBarLeftItem(param: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun clearNavBarMoreItem(param: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun setNavBarLeftItem(param: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun setNavBarRightItem(param: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun push(param: String?): Boolean {
-
-        val maps = JSON.parse(param) as Map<*, *>
-
-        if(maps["url"]==null || maps["title"]==null){
-            return  false
-        }else{
-            val intent = Intent(this@ShowActivity, ShowActivity::class.java)
-            intent.putExtra("url",maps["url"].toString())
-            intent.putExtra("title",maps["title"].toString())
-            startActivity(intent)
-            return  true
-        }
-    }
-    override fun clearNavBarRightItem(param: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun pop(param: String?): Boolean {
-        finish()
-        return true
-    }
-
-    override fun setNavBarTitle(param: String?): Boolean {
-        toolText.text = param
-        return true
-    }
-
-    override fun setNavBarMoreItem(param: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class ShowActivity: MyActivtiyToolBar(),IWXRenderListener {
 
     protected var mWeexInstance: WXSDKInstance? = null
     var urlStr:String=""
@@ -80,6 +33,7 @@ class ShowActivity: MyActivtiyToolBar(),IWXRenderListener, IActivityNavBarSetter
     var rColor:String=""
     var rTag:String=""
     var rImg:String=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -146,7 +100,6 @@ class ShowActivity: MyActivtiyToolBar(),IWXRenderListener, IActivityNavBarSetter
             mWeexInstance?.destroy()
         }
         mWeexInstance = WXSDKInstance(this)
-        WXSDKEngine.setActivityNavBarSetter(this)
         mWeexInstance?.registerRenderListener(this)
         //mWeexInstance?.renderByUrl("WXSample","http://10.66.48.190:8081/dist/index.weex.js",null, null, WXRenderStrategy.APPEND_ASYNC);
         val options = HashMap<String,Any>()

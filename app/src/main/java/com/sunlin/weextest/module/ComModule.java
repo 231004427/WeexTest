@@ -3,6 +3,7 @@ package com.sunlin.weextest.module;
 import android.os.Build;
 
 import com.sunlin.weextest.ShowActivity;
+import com.sunlin.weextest.WeexActivity;
 import com.sunlin.weextest.common.LogC;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
@@ -26,9 +27,10 @@ public class ComModule extends WXModule {
         infos.put("model", Build.MODEL);
         callback.invoke(infos);
     }
+    //刷新
     @JSMethod(uiThread = false)
     public void reload(){
-        ShowActivity showActivity=(ShowActivity)mWXSDKInstance.getContext();
-        showActivity.render();
+        WeexActivity weexActivity=(WeexActivity)mWXSDKInstance.getContext();
+        weexActivity.render();
     }
 }
