@@ -1,4 +1,6 @@
 package com.sunlin.weextest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,6 +43,8 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
     private String  rTag;
     private String  rImg;
     //////////////
+    private Boolean isCatch=false;
+    //////////////
     private Boolean isGet=false;
     private Boolean isLoading=false;
     private WeexJSVesion weexJSVesion;
@@ -68,10 +72,17 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
         rTag = rTagExt==null?"":rTagExt;
         rImg = rImgExt==null?"":rImgExt;
 
+        //
+        SharedPreferences sp = this.getSharedPreferences("WEEXTEST", Context.MODE_PRIVATE);
+        isCatch=sp.getBoolean("isCatch",true);
         //导航栏
         buildToolbar();
-        //JS版本判断
-        getJSBundle();
+        if(isCatch){
+            //JS版本判断
+            getJSBundle();
+        }else{
+            render();
+        }
     }
 
     @Override
@@ -136,10 +147,15 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
          * options:初始化时传入WEEX的参数，比如 bundle JS地址
          * flag:渲染策略。WXRenderStrategy.APPEND_ASYNC:异步策略先返回外层View，其他View渲染完成后调用onRenderSuccess。WXRenderStrategy.APPEND_ONCE 所有控件渲染完后后一次性返回。
          */
-        if(template.isEmpty()){
-            template=readFile(filePath);
+        if(isCatch){
+            if(template.isEmpty()){
+                template=readFile(filePath);
+            }
+            mWeexInstance.render("WXSample", template, options, null, WXRenderStrategy.APPEND_ONCE);
+        }else{
+            mWeexInstance.renderByUrl("WXSample", url, options, null, WXRenderStrategy.APPEND_ONCE);
         }
-        mWeexInstance.render("WXSample", template, options, null, WXRenderStrategy.APPEND_ONCE);
+
     }
     private String readFile(String filePath){
         String encoding = "UTF-8";

@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.alibaba.fastjson.JSON;
 import com.sunlin.weextest.ShowActivity;
+import com.sunlin.weextest.WeexActivity;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 import com.taobao.weex.common.WXModule;
@@ -28,7 +29,7 @@ public class WXTitleBarModule extends WXModule {
         String rImg= maps.get("rImg");
 
 
-        Intent intent = new Intent(mWXSDKInstance.getContext(), ShowActivity.class);
+        Intent intent = new Intent(mWXSDKInstance.getContext(), WeexActivity.class);
         intent.putExtra("url",url);
         intent.putExtra("title",title);
         intent.putExtra("rTitle",rTitle);

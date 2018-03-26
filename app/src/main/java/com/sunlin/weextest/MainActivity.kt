@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private  var url:String=""
+    private  var isCatch:Boolean=true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         //
         val sp = this.getSharedPreferences("WEEXTEST", Context.MODE_PRIVATE)
         url=sp.getString("url", "")
+        isCatch=sp.getBoolean("isCatch",true)
 
         if(url.isEmpty()) {
             url = "http://127.0.0.1:8081/dist/index.weex.js"
@@ -32,11 +35,19 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("title","WEEX")
             intent.putExtra("rTitle","刷新")
             intent.putExtra("rImg","save22")
+
+            if(checkBox.isChecked){
+                intent.putExtra("isCatch","true")
+            }else{
+                intent.putExtra("isCatch","false")
+            }
+
             startActivity(intent)
 
             val sp = this.getSharedPreferences("WEEXTEST", Context.MODE_PRIVATE)
             val editor = sp.edit()
             editor.putString("url", url)
+            editor.putBoolean("isCatch",checkBox.isChecked)
             editor.commit()
         }
     }
