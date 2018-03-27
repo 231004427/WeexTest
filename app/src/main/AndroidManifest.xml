@@ -46,6 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WeexActivity"></activity>
+        <activity android:name=".WXPageActivity"></activity>
     </application>
 
 </manifest>

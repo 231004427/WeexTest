@@ -75,6 +75,8 @@ class ShowActivity: MyActivtiyToolBar(),IWXRenderListener {
         if(isSet){
             ToolbarSetListense {onclick()}
         }
+
+
     }
     fun onclick(){
         val data = HashMap<String,Any>()

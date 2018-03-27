@@ -20,6 +20,7 @@ public class WeexApplication extends Application {
         super.onCreate();
         InitConfig config = new InitConfig.Builder().setImgAdapter(new WXImageAdapter()).build();
         try {
+
             WXSDKEngine.registerModule("ComModule",ComModule.class);
             WXSDKEngine.registerModule("titleBar",WXTitleBarModule.class);
             WXSDKEngine.registerComponent("richtext", RichText.class, false);

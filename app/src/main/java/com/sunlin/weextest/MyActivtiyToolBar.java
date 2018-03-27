@@ -45,6 +45,9 @@ public abstract class MyActivtiyToolBar extends AppCompatActivity {
             }
         });
     }
+    public int displayHeight(){
+        return (int)ScreenUtil.getScreenHeightPixels(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

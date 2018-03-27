@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -12,11 +13,14 @@ import com.sunlin.weextest.common.GsonHelp;
 import com.sunlin.weextest.common.HttpTask;
 import com.sunlin.weextest.common.LogC;
 import com.sunlin.weextest.common.RestTask;
+import com.sunlin.weextest.common.ScreenUtil;
 import com.sunlin.weextest.common.SharedData;
 import com.sunlin.weextest.common.WeexJSVesion;
 import com.taobao.weex.IWXRenderListener;
+import com.taobao.weex.RenderContainer;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
+import com.taobao.weex.ui.component.NestedContainer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +36,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener,RestTask.ResponseCallback {
+public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener,WXSDKInstance.NestedInstanceInterceptor,RestTask.ResponseCallback {
 
     private WXSDKInstance mWeexInstance;
     private FrameLayout container;
@@ -76,6 +80,9 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
         SharedPreferences sp = this.getSharedPreferences("WEEXTEST", Context.MODE_PRIVATE);
         isCatch=sp.getBoolean("isCatch",true);
         //导航栏
+        ViewGroup.LayoutParams layoutParams= container.getLayoutParams();
+        layoutParams.height=displayHeight();
+        container.setLayoutParams(layoutParams);
         buildToolbar();
         if(isCatch){
             //JS版本判断
@@ -137,6 +144,7 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
             mWeexInstance.destroy();
         }
         mWeexInstance = new WXSDKInstance(this);
+        mWeexInstance.setTrackComponent(true);
         mWeexInstance.registerRenderListener(this);
         //mWeexInstance?.renderByUrl("WXSample","http://10.66.48.190:8081/dist/index.weex.js",null, null, WXRenderStrategy.APPEND_ASYNC);
         Map options = new HashMap<String,Object>();
@@ -151,9 +159,9 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
             if(template.isEmpty()){
                 template=readFile(filePath);
             }
-            mWeexInstance.render("WXSample", template, options, null, WXRenderStrategy.APPEND_ONCE);
+            mWeexInstance.render("WXSample", template, options, null,WXRenderStrategy.APPEND_ONCE);
         }else{
-            mWeexInstance.renderByUrl("WXSample", url, options, null, WXRenderStrategy.APPEND_ONCE);
+            mWeexInstance.renderByUrl("WXSample", url, options, null, ScreenUtil.getScreenWidthPixels(this),ScreenUtil.getScreenHeightPixels(this),WXRenderStrategy.APPEND_ONCE);
         }
 
     }
@@ -337,4 +345,10 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
         String savePath = downloadFile.getAbsolutePath();
         return savePath;
     }
+
+    @Override
+    public void onCreateNestInstance(WXSDKInstance wxsdkInstance, NestedContainer nestedContainer) {
+        Log.d("Weex", "Nested Instance created.");
+    }
+
 }
