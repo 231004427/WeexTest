@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.sunlin.weextest.common.GsonHelp;
 import com.sunlin.weextest.common.HttpTask;
@@ -132,6 +133,7 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
                     Map data = new HashMap<String,Object>();
                     data.put("tag", toolSet.getTag());
                     mWeexInstance.fireEvent("_root","navclick",data,null);
+                    mWeexInstance.fireGlobalEventCallback("navclickEvent",data);
                 }
             });
         }
@@ -319,6 +321,8 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
     public void onRequestError(Exception error) {
         LogC.write("network error!","WeexActivity");
         isLoading=false;
+
+        Toast.makeText(this, "服务器请求失败", Toast.LENGTH_LONG).show();
     }
     private void down(){
         if(isLoading){return;}

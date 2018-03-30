@@ -1,13 +1,11 @@
 package com.sunlin.weextest.common;
 
 import android.app.Application;
-
-import com.sunlin.weextest.common.WXImageAdapter;
 import com.sunlin.weextest.module.ComModule;
+import com.sunlin.weextest.module.WXActionSheetModule;
 import com.sunlin.weextest.module.WXTitleBarModule;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
-import com.taobao.weex.appfram.navigator.WXNavigatorModule;
 import com.taobao.weex.common.WXException;
 
 /**
@@ -23,6 +21,7 @@ public class WeexApplication extends Application {
 
             WXSDKEngine.registerModule("ComModule",ComModule.class);
             WXSDKEngine.registerModule("titleBar",WXTitleBarModule.class);
+            WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
             WXSDKEngine.registerComponent("richtext", RichText.class, false);
         } catch (WXException e) {
             e.printStackTrace();

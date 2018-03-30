@@ -82,6 +82,7 @@ class ShowActivity: MyActivtiyToolBar(),IWXRenderListener {
         val data = HashMap<String,Any>()
         data.put("tag", toolSet.tag)
         mWeexInstance?.fireEvent("_root","navclick",data,null);
+        mWeexInstance?.fireGlobalEventCallback("navclickEvent",data);
     }
     fun getResourceByReflect(imageName: String): Int {
         val drawable = R.drawable::class.java

@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //
+
+        //
         val sp = this.getSharedPreferences("WEEXTEST", Context.MODE_PRIVATE)
         url=sp.getString("url", "")
         isCatch=sp.getBoolean("isCatch",true)
