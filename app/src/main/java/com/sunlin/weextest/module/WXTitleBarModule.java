@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.alibaba.fastjson.JSON;
-import com.sunlin.weextest.ShowActivity;
 import com.sunlin.weextest.WeexActivity;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;

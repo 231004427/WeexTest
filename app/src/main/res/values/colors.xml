@@ -42,4 +42,6 @@
     <color name="blackApath">#Bf000000</color>
     <color name="text_background">#FAFAFA</color>
     <color name="talk_background">#E6E6E6</color>
+    <color name="btn_cancel_color">#999999</color>
+    <color name="btn_confirm_color">#303F9F</color>
 </resources>
