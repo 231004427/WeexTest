@@ -23,6 +23,20 @@ import java.util.Map;
  */
 
 public class WXTitleBarModule extends WXModule {
+
+    @JSMethod(uiThread = false)
+    public void setTitle(String param,JSCallback callback){
+        Map<String, String> maps = (Map<String, String>) JSON.parse(param);
+        //设置标题
+        String title= maps.get("title");
+        MyActivtiyToolBar activity=(MyActivtiyToolBar)mWXSDKInstance.getContext();
+        activity.toolText.setText(title);
+
+        Map<String, String> infos = new HashMap<>();
+        infos.put("result", "ok");
+        callback.invoke(infos);
+    }
+
     @JSMethod(uiThread = false)
     public void push(String param,JSCallback callback){
 

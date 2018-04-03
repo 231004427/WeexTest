@@ -87,10 +87,10 @@ public abstract class MyActivtiyToolBar extends AppCompatActivity {
             toolbar.getLayoutParams().height+=ScreenUtil.getStatusHeight(this);
         }
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY ;
-        decorView.setSystemUiVisibility(uiOptions);
+        //View decorView = getWindow().getDecorView();
+        //int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        //        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY ;
+        //decorView.setSystemUiVisibility(uiOptions);
     }
 
     /**
