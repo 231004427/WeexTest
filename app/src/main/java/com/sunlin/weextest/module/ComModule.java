@@ -3,6 +3,7 @@ package com.sunlin.weextest.module;
 import android.os.Build;
 import com.sunlin.weextest.WeexActivity;
 import com.sunlin.weextest.common.LogC;
+import com.sunlin.weextest.common.ScreenUtil;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 import com.taobao.weex.common.WXModule;
@@ -30,5 +31,25 @@ public class ComModule extends WXModule {
     public void reload(){
         WeexActivity weexActivity=(WeexActivity)mWXSDKInstance.getContext();
         weexActivity.render();
+    }
+    @JSMethod(uiThread = false)
+    public void getHeight(String param,JSCallback callback){
+        WeexActivity weexActivity=(WeexActivity)mWXSDKInstance.getContext();
+        float barHeight=44*ScreenUtil.getScreenDensity(weexActivity);
+        int statusHeight=ScreenUtil.getStatusHeight(weexActivity);
+        int topHeight=statusHeight+(int)barHeight;
+        Map<String, String> infos = new HashMap<>();
+        infos.put("barHeight", String.valueOf((int)barHeight));
+        infos.put("statusHeight", String.valueOf(statusHeight));
+        infos.put("topHeight", String.valueOf(topHeight));
+        callback.invoke(infos);
+    }
+    @JSMethod(uiThread = false)
+    public void getToken(String param,JSCallback callback){
+
+        //178b583ea44264c38df1e9ebe2900868
+        Map<String, String> infos = new HashMap<>();
+        infos.put("token", "178b583ea44264c38df1e9ebe2900868");
+        callback.invoke(infos);
     }
 }

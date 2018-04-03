@@ -16,17 +16,16 @@ public class WeexApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        InitConfig config = new InitConfig.Builder().setImgAdapter(new WXImageAdapter()).build();
         try {
-
+            InitConfig config = new InitConfig.Builder().setImgAdapter(new WXImageAdapter()).build();
             WXSDKEngine.registerModule("ComModule",ComModule.class);
             WXSDKEngine.registerModule("titleBar",WXTitleBarModule.class);
             WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
             WXSDKEngine.registerComponent("richtext", RichText.class, false);
+            WXSDKEngine.initialize(this, config);
         } catch (WXException e) {
             e.printStackTrace();
         }
-        WXSDKEngine.initialize(this, config);
     }
 
 }
