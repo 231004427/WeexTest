@@ -1,7 +1,10 @@
 package com.sunlin.weextest.module;
 
+import android.content.Intent;
 import android.os.Build;
 
+import com.alibaba.fastjson.JSON;
+import com.sunlin.weextest.MainActivity;
 import com.sunlin.weextest.WeexActivity;
 import com.sunlin.weextest.common.LogC;
 import com.sunlin.weextest.common.ScreenUtil;
@@ -52,5 +55,17 @@ public class ComModule extends WXModule {
         Map<String, String> infos = new HashMap<>();
         infos.put("token", "178b583ea44264c38df1e9ebe2900868");
         callback.invoke(infos);
+    }
+    @JSMethod(uiThread = false)
+    public void goActivity(String param,JSCallback callback){
+
+        //type,返回订单中心
+        Map<String, String> maps = (Map<String, String>) JSON.parse(param);
+        String type= maps.get("type");
+        if(type.equals("1") && type!=null){
+            Intent intent = new Intent(mWXSDKInstance.getContext(), MainActivity.class);
+            mWXSDKInstance.getContext().startActivity(intent);
+
+        }
     }
 }
