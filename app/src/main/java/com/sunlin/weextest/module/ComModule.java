@@ -1,6 +1,7 @@
 package com.sunlin.weextest.module;
 
 import android.os.Build;
+
 import com.sunlin.weextest.WeexActivity;
 import com.sunlin.weextest.common.LogC;
 import com.sunlin.weextest.common.ScreenUtil;
