@@ -105,9 +105,16 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
         String urlVesion=url;
         int num=url.lastIndexOf("/");
         StringBuilder sb = new StringBuilder(urlVesion);
-        sb.insert(num+1,"v/v.");
+
+        String fileName=sb.substring(num+1,url.length());
+        num=url.lastIndexOf("dist");
+        String pathName=sb.substring(0,num);
+
+        //dist/test/index.weex.js,dist/v/v.index.weex.js
+
+        urlVesion=pathName+"dist/v/v."+fileName;
         //获取版本信息
-        HttpTask.Get(sb.toString(),null,this);
+        HttpTask.Get(urlVesion,null,this);
 
     }
     private void buildToolbar(){

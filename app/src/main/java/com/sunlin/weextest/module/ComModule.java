@@ -58,7 +58,6 @@ public class ComModule extends WXModule {
     }
     @JSMethod(uiThread = false)
     public void goActivity(String param,JSCallback callback){
-
         //type,返回订单中心
         Map<String, String> maps = (Map<String, String>) JSON.parse(param);
         String type= maps.get("type");
