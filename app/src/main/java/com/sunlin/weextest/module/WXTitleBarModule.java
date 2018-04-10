@@ -66,7 +66,7 @@ public class WXTitleBarModule extends WXModule {
     }
     public void setNavBarRightItem(String param,JSCallback callback){
         Map<String, String> maps = (Map<String, String>) JSON.parse(param);
-        String rTitle= maps.get("title");
+        String rTitle= maps.get("rTitle");
         String rColor= maps.get("color");
         String rTag= maps.get("tag");
         String rImg= maps.get("img");

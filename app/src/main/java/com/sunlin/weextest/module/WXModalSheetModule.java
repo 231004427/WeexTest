@@ -34,9 +34,11 @@ public class WXModalSheetModule extends WXModule {
         dialog.setOnClickListener(new ConfirmDialog.OnClickListener() {
             @Override
             public void onClick(int type) {
+                if(callback != null){
                 Map<String, Object> infos = new HashMap<>();
                 infos.put("result", type);
                 callback.invoke(infos);
+                }
             }
         });
 

@@ -66,13 +66,15 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 
         submit.setOnClickListener(this);
         cancel.setOnClickListener(this);
-        if(!titleStr.equals("")) {
+        if(!titleStr.equals("null") && !titleStr.equals("")) {
             title.setText(titleStr);
+        }else{
+            title.setVisibility(View.GONE);
         }
         if(!submitStr.equals("")) {
             submit.setText(submitStr);
         }
-        if(!cancelStr.equals("")) {
+        if(!cancelStr.equals("null") && !cancelStr.equals("")) {
             cancel.setText(cancelStr);
         }else{
             cancel.setVisibility(View.GONE);

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
+
     @JSMethod
     public void pick(Map<String, Object> options, final JSCallback callback) {
 
@@ -28,6 +29,9 @@ public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
         }
 
         WeexActivity weexActivity=(WeexActivity)mWXSDKInstance.getContext();
+
+        int bottom=weexActivity.getBackButtonHight();
+
 
         SelectPickerPopWin pickerPopWin = new SelectPickerPopWin.Builder(weexActivity, new SelectPickerPopWin.OnSelectPickedListener() {
             @Override
@@ -42,6 +46,7 @@ public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
                 .textCancel("取消") //text of cancel button
                 .btnTextSize(16) // button text size
                 .viewTextSize(25) // pick view text size
+                .bottomConfirm(bottom)
                 .colorCancel(Color.parseColor("#999999")) //color of cancel button
                 .colorConfirm(Color.parseColor("#009900"))//color of confirm button
                 .valueChose("Amber") //

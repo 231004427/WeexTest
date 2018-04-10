@@ -14,6 +14,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.sunlin.weextest.R;
@@ -44,6 +45,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
     private int colorConfirm;
     private int btnTextsize;//text btnTextsize of cancel and confirm button
     private int viewTextSize;
+    private int bttomHeight=0;
     private List<String> itemList;
 
     public static class Builder{
@@ -66,6 +68,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         private int colorConfirm = Color.parseColor("#303F9F");
         private int btnTextSize = 16;//text btnTextsize of cancel and confirm button
         private int viewTextSize = 25;
+        private int bttomHeight=0;
 
         public SelectPickerPopWin.Builder itemsBuild(List<String> items){
             this.itemList = items;
@@ -94,6 +97,10 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
 
         public SelectPickerPopWin.Builder colorConfirm(int colorConfirm){
             this.colorConfirm = colorConfirm;
+            return this;
+        }
+        public SelectPickerPopWin.Builder bottomConfirm(int height){
+            this.bttomHeight = height;
             return this;
         }
 
@@ -126,6 +133,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         this.btnTextsize = builder.btnTextSize;
         this.viewTextSize = builder.viewTextSize;
         this.itemList = builder.itemList;
+        this.bttomHeight=builder.bttomHeight;
         setSelectedValue(builder.valueChose);
         initView();
     }
@@ -143,6 +151,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         confirmBtn.setTextSize(btnTextsize);
         yearLoopView = (LoopView) contentView.findViewById(R.id.picker_select);
         pickerContainerV = contentView.findViewById(R.id.container_picker);
+
 
         yearLoopView.setLoopListener(new LoopScrollListener() {
             @Override
@@ -165,7 +174,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         if(!TextUtils.isEmpty(textCancel)){
             cancelBtn.setText(textCancel);
         }
-
+        setClippingEnabled(false);
         setTouchable(true);
         setFocusable(true);
         // setOutsideTouchable(true);
@@ -225,12 +234,17 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
                     0, Animation.RELATIVE_TO_SELF, 1,
                     Animation.RELATIVE_TO_SELF, 0);
 
-            showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM,
-                    0, 0);
+            showAtLocation(activity.getWindow().getDecorView(), Gravity.NO_GRAVITY,
+                    0, -this.bttomHeight);
+
             trans.setDuration(400);
             trans.setInterpolator(new AccelerateDecelerateInterpolator());
 
             pickerContainerV.startAnimation(trans);
+
+            //RelativeLayout.LayoutParams layoutParams = (LayoutParams) listview.getLayoutParams();
+            //layoutParams.bottomMargin=0;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+            //listview.setLayoutParams(layoutParams);
         }
     }
 
