@@ -214,6 +214,7 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
         super.onStart();
         if (mWeexInstance != null) {
             mWeexInstance.onActivityStart();
+            mWeexInstance.fireEvent("_root","viewstart",null,null);
         }
     }
 
@@ -238,6 +239,7 @@ public class WeexActivity extends MyActivtiyToolBar implements IWXRenderListener
         super.onStop();
         if (mWeexInstance != null) {
             mWeexInstance.onActivityStop();
+            mWeexInstance.fireEvent("_root","viewstop",null,null);
         }
     }
 

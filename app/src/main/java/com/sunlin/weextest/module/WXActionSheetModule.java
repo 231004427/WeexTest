@@ -225,6 +225,7 @@ public class WXActionSheetModule extends WXSDKEngine.DestroyableModule {
         Object title = options.get("title");
         Object message = options.get("message");
         Object items = options.get("items");
+
         if (mWXSDKInstance.getContext() instanceof FragmentActivity) {
             WXActionSheet.Builder builder = WXActionSheet.createBuilder((FragmentActivity) mWXSDKInstance.getContext());
             if (title != null) {

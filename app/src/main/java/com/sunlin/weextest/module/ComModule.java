@@ -67,4 +67,11 @@ public class ComModule extends WXModule {
 
         }
     }
+    @JSMethod(uiThread = false)
+    public void upDate(String param,JSCallback callback){
+        //178b583ea44264c38df1e9ebe2900868
+        Map<String, String> infos = new HashMap<>();
+        infos.put("result", "ok");
+        callback.invoke(infos);
+    }
 }

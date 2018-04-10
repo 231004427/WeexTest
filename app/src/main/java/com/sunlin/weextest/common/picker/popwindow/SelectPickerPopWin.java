@@ -44,8 +44,8 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
     private int colorConfirm;
     private int btnTextsize;//text btnTextsize of cancel and confirm button
     private int viewTextSize;
+    private List<String> itemList;
 
-    List<String> itemList = new ArrayList();
     public static class Builder{
 
         //Required
@@ -59,12 +59,18 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         //Option
         private int selectIndex = DEFAULT_SELECT;
         private String valueChose;
+        private List<String> itemList;
         private String textCancel = "取消";
         private String textConfirm = "确认";
         private int colorCancel = Color.parseColor("#999999");
         private int colorConfirm = Color.parseColor("#303F9F");
         private int btnTextSize = 16;//text btnTextsize of cancel and confirm button
         private int viewTextSize = 25;
+
+        public SelectPickerPopWin.Builder itemsBuild(List<String> items){
+            this.itemList = items;
+            return this;
+        }
 
         public SelectPickerPopWin.Builder textCancel(String textCancel){
             this.textCancel = textCancel;
@@ -119,6 +125,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         this.colorConfirm = builder.colorConfirm;
         this.btnTextsize = builder.btnTextSize;
         this.viewTextSize = builder.viewTextSize;
+        this.itemList = builder.itemList;
         setSelectedValue(builder.valueChose);
         initView();
     }
@@ -175,8 +182,8 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
      */
     private void initPickerViews() {
 
-        initSelectPickerView();
-        yearLoopView.setDataList((ArrayList) itemList);
+        //initSelectPickerView();
+        yearLoopView.setDataList(itemList);
         yearLoopView.setInitPosition(itemPos);
     }
 

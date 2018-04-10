@@ -3,6 +3,8 @@ package com.sunlin.weextest.common;
 import android.app.Application;
 import com.sunlin.weextest.module.ComModule;
 import com.sunlin.weextest.module.WXActionSheetModule;
+import com.sunlin.weextest.module.WXModalSheetModule;
+import com.sunlin.weextest.module.WXPickerSheetModule;
 import com.sunlin.weextest.module.WXTitleBarModule;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
@@ -21,6 +23,8 @@ public class WeexApplication extends Application {
             WXSDKEngine.registerModule("ComModule",ComModule.class);
             WXSDKEngine.registerModule("titleBar",WXTitleBarModule.class);
             WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
+            WXSDKEngine.registerModule("pickerSheet", WXPickerSheetModule.class);
+            WXSDKEngine.registerModule("modalSheet", WXModalSheetModule.class);
             WXSDKEngine.registerComponent("richtext", RichText.class, false);
             WXSDKEngine.initialize(this, config);
         } catch (WXException e) {
