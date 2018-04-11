@@ -23,7 +23,9 @@ public class WeexApplication extends Application {
             WXSDKEngine.registerModule("ComModule",ComModule.class);
             WXSDKEngine.registerModule("titleBar",WXTitleBarModule.class);
             WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
+            //选择框
             WXSDKEngine.registerModule("pickerSheet", WXPickerSheetModule.class);
+            //提示框
             WXSDKEngine.registerModule("modalSheet", WXModalSheetModule.class);
             WXSDKEngine.registerComponent("richtext", RichText.class, false);
             WXSDKEngine.initialize(this, config);

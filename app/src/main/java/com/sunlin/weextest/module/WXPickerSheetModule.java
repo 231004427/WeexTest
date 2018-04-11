@@ -18,11 +18,11 @@ import java.util.Map;
 
 public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
 
+    //下拉选择
     @JSMethod
     public void pick(Map<String, Object> options, final JSCallback callback) {
-
-        Object index = options.get("index");
-        Object items = options.get("items");
+        Object index = options.get("index");//备用
+        Object items = options.get("items");//下拉内容
         List<String> itemList=new ArrayList();
         for (String map : (List<String>)items) {
             itemList.add(map);
@@ -35,10 +35,10 @@ public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
 
         SelectPickerPopWin pickerPopWin = new SelectPickerPopWin.Builder(weexActivity, new SelectPickerPopWin.OnSelectPickedListener() {
             @Override
-            public void onSelectPickCompleted(int index, String valueDesc) {
+            public void onSelectPickCompleted(int num, String valueDesc) {
                 Map<String, Object> infos = new HashMap<>();
                 infos.put("result", "success");
-                infos.put("data", index);
+                infos.put("data", num);//确认返回选择的序号
                 callback.invoke(infos);
             }
         }).itemsBuild(itemList)
