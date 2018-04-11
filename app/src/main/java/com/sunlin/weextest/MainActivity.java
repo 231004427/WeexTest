@@ -16,6 +16,8 @@ import com.sunlin.weextest.common.picker.popwindow.DatePickerPopWin;
 import com.sunlin.weextest.common.picker.popwindow.SelectPickerPopWin;
 import com.sunlin.weextest.common.picker.popwindow.TimePickerPopWin;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private  String url="";
     private  Boolean isCatch=true;
@@ -55,26 +57,6 @@ public class MainActivity extends AppCompatActivity {
                         .maxYear(2550) // max year in loop
                         .dateChose("2018-04-01") // date chose when init popwindow
                         .showDayMonthYear(false)
-                        .build();
-                pickerPopWin.showPopWin(MainActivity.this);
-            }
-        });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelectPickerPopWin pickerPopWin = new SelectPickerPopWin.Builder(MainActivity.this, new SelectPickerPopWin.OnSelectPickedListener() {
-                    @Override
-                    public void onSelectPickCompleted(int index, String valueDesc) {
-                        Toast.makeText(MainActivity.this, valueDesc, Toast.LENGTH_SHORT).show();
-                    }
-                }).textConfirm("确认") //text of confirm button
-                        .textCancel("取消") //text of cancel button
-                        .btnTextSize(16) // button text size
-                        .viewTextSize(25) // pick view text size
-                        .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                        .colorConfirm(Color.parseColor("#009900"))//color of confirm button
-                        .valueChose("Amber") //
                         .build();
                 pickerPopWin.showPopWin(MainActivity.this);
             }

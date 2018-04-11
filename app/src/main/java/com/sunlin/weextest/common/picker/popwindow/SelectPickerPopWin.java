@@ -60,7 +60,6 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
 
         //Option
         private int selectIndex = DEFAULT_SELECT;
-        private String valueChose;
         private List<String> itemList;
         private String textCancel = "取消";
         private String textConfirm = "确认";
@@ -85,8 +84,8 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
             return this;
         }
 
-        public SelectPickerPopWin.Builder valueChose(String valueChose){
-            this.valueChose = valueChose;
+        public SelectPickerPopWin.Builder valueChose(int selectIndex){
+            this.selectIndex = selectIndex;
             return this;
         }
 
@@ -134,7 +133,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
         this.viewTextSize = builder.viewTextSize;
         this.itemList = builder.itemList;
         this.bttomHeight=builder.bttomHeight;
-        setSelectedValue(builder.valueChose);
+        setSelectedValue(builder.selectIndex);
         initView();
     }
 
@@ -157,7 +156,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
             @Override
             public void onItemSelect(int item) {
                 itemPos = item;
-                initSelectPickerView();
+                //initSelectPickerView();
             }
         });
 
@@ -211,13 +210,11 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
     /**
      * set selected date position value when initView.
      *
-     * @param valueStr
+     * @param index
      */
-    public void setSelectedValue(String valueStr) {
+    public void setSelectedValue(int index) {
 
-        if (!TextUtils.isEmpty(valueStr)) {
-            this.itemPos=0;
-        }
+        this.itemPos=index;
     }
 
     /**
@@ -243,7 +240,7 @@ public class SelectPickerPopWin extends PopupWindow implements View.OnClickListe
             pickerContainerV.startAnimation(trans);
 
             //RelativeLayout.LayoutParams layoutParams = (LayoutParams) listview.getLayoutParams();
-            //layoutParams.bottomMargin=0;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+            //layoutParams.bottomMargin=0;//
             //listview.setLayoutParams(layoutParams);
         }
     }

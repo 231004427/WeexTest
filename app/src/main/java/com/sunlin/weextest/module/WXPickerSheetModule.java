@@ -21,11 +21,15 @@ public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
     //下拉选择
     @JSMethod
     public void pick(Map<String, Object> options, final JSCallback callback) {
-        Object index = options.get("index");//备用
+        Object index = options.get("index");//默认选择
         Object items = options.get("items");//下拉内容
         List<String> itemList=new ArrayList();
         for (String map : (List<String>)items) {
             itemList.add(map);
+        }
+        int selectIndex=0;
+        if(index!=null){
+            selectIndex=Integer.parseInt(String.valueOf(index));
         }
 
         WeexActivity weexActivity=(WeexActivity)mWXSDKInstance.getContext();
@@ -49,7 +53,7 @@ public class WXPickerSheetModule extends WXSDKEngine.DestroyableModule {
                 .bottomConfirm(bottom)
                 .colorCancel(Color.parseColor("#999999")) //color of cancel button
                 .colorConfirm(Color.parseColor("#009900"))//color of confirm button
-                .valueChose("Amber") //
+                .valueChose(selectIndex) //
                 .build();
         pickerPopWin.showPopWin(weexActivity);
     }
